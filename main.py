@@ -14,10 +14,6 @@ TOKEN = os.environ.get('TOKEN')
 PORT = int(os.environ.get('PORT'))
 APP_URL = os.environ.get('APP_URL')
 
-logger.info('TOKEN="%s"', TOKEN)
-logger.info('PORT="%s"', PORT)
-logger.info('APP_URL="%s"', APP_URL)
-
 def start(update: Update, _: CallbackContext) -> None:
     user = update.effective_user
     update.message.reply_markdown_v2(
@@ -48,7 +44,6 @@ def main() -> None:
 
     dispatcher.add_error_handler(error)
 
-    # updater.start_polling()
     updater.start_webhook(listen="0.0.0.0",
                       port=PORT,
                       url_path=TOKEN,
