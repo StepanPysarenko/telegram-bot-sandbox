@@ -10,6 +10,10 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+TOKEN = os.environ.get('TOKEN')
+PORT = int(os.environ.get('PORT', '8443'))
+APP_URL = os.environ.get('APP_URL')
+
 def start(update: Update, _: CallbackContext) -> None:
     user = update.effective_user
     update.message.reply_markdown_v2(
@@ -31,7 +35,7 @@ def error(bot, update, error):
 
 
 def main() -> None:
-    updater = Updater(os.environ.get('TOKEN'))
+    updater = Updater(TOKEN)
 
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
@@ -42,9 +46,9 @@ def main() -> None:
 
     # updater.start_polling()
     updater.start_webhook(listen="0.0.0.0",
-                          port=int(os.environ.get('PORT')),
+                          port=PORT),
                           url_path=TOKEN)
-    updater.bot.set_webhook(os.environ.get('APP_URL') + TOKEN)
+    updater.bot.set_webhook(APP_URL + TOKEN)
     updater.idle()
 
 
