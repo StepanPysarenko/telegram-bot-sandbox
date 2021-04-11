@@ -11,8 +11,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 TOKEN = os.environ.get('TOKEN')
-PORT = int(os.environ.get('PORT', '8443'))
+PORT = int(os.environ.get('PORT'))
 APP_URL = os.environ.get('APP_URL')
+
+logger.info('TOKEN="%s"', TOKEN)
+logger.info('PORT="%s"', PORT)
+logger.info('APP_URL="%s"', APP_URL)
 
 def start(update: Update, _: CallbackContext) -> None:
     user = update.effective_user
