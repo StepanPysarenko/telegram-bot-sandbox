@@ -40,14 +40,12 @@ def main() -> None:
 
     dispatcher.add_error_handler(error)
 
-    updater.start_polling()
+    # updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(os.environ.get('PORT')),
+                          url_path=TOKEN)
+    updater.bot.set_webhook(os.environ.get('APP_URL') + TOKEN)
     updater.idle()
-
-    # updater.start_webhook(listen="0.0.0.0",
-    #                       port=int(os.environ.get('PORT')),
-    #                       url_path=TOKEN)
-    # updater.bot.set_webhook(os.environ.get('APP_URL') + TOKEN)
-    # updater.idle()
 
 
 if __name__ == '__main__':
