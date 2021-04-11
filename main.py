@@ -46,7 +46,7 @@ def main() -> None:
 
     # updater.start_polling()
     updater.start_webhook(listen="0.0.0.0",
-                          port=PORT),
+                          port=PORT,
                           url_path=TOKEN)
     updater.bot.set_webhook(APP_URL + TOKEN)
     updater.idle()
